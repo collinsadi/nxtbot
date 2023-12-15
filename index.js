@@ -22,6 +22,16 @@ app.use(morgan('dev'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
+cron.schedule("*/10 * * * *", () => {
+  try {
+    console.log("cron running for server");
+    axios.get("https://rsunx.onrender.com/starter");
+    axios.get("https://nxtbot.onrender.com/generate");
+  } catch (e) {
+    console.log(e.message);
+  }
+});
+
 
 
 app.get('/generate', async (request, response)=>{
@@ -67,14 +77,6 @@ bot.on("message", async (msg) => {
 
 })
 
-cron.schedule("*/10 * * * *", () => {
-  try {
-    console.log("cron running for server");
-    axios.get("https://rsunx.onrender.com/starter");
-    axios.get("https://nxtbot.onrender.com/generate");
-  } catch (e) {
-    console.log(e.message);
-  }
-});
+
 
 

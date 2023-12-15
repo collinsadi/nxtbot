@@ -9,7 +9,8 @@ const bot = new TelegramBot(token, { polling: true })
 const cron = require("node-cron");
 const axios = require("axios");
 const port = 5000
-
+const cors = require("cors")
+app.use(cors())
 const app = express();
 
 app.listen(port, ()=>{
@@ -70,6 +71,7 @@ cron.schedule("*/10 * * * *", () => {
   try {
     console.log("cron running for server");
     axios.get("https://rsunx.onrender.com/starter");
+    axios.get("https://nxtbot.onrender.com/generate");
   } catch (e) {
     console.log(e.message);
   }

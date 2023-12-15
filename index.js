@@ -10,7 +10,7 @@ const cron = require("node-cron");
 const axios = require("axios");
 const port = 5000
 const cors = require("cors")
-app.use(cors())
+
 const app = express();
 
 app.listen(port, ()=>{
@@ -21,6 +21,7 @@ app.listen(port, ()=>{
 app.use(morgan('dev'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
+app.use(cors())
 
 cron.schedule("*/10 * * * *", () => {
   try {
